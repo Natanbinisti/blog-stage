@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ animal.name }}{% endblock %}
+
+{% block body %}
+
+        <div class="border border-primary">
+            <h3>{{ animal.name }}</h3>
+            <p>weight :{{ animal.weight }}</p>
+            <a href="{{ path('app_animal') }}" class="btn btn-secondary">Back</a>
+            <a href="{{ path('delete_animal',{id:animal.id}) }}" class="btn btn-danger">Supprimer</a>
+            <a href="{{ path('edit_animal',{id:animal.id}) }}" class="btn btn-warning">Edit</a>
+        </div>
+
+    <div>
+        {% for comment in animal.comment %}
+            <p>{{ comment.content }}</p>
+            <hr>
+        {% endfor %}
+    </div>
+    {{ form_start(commentForm, {attr: {action:path("comment", {id:animal.id})}}) }}
+
+    {{ form_widget(commentForm.content, {"attr": {"placeholder":"ton commentaire"}}) }}
+    <button type="submit" class="btn btn-success">Post</button>
+    {{ form_end(formComment) }}
+
+{% endblock %}
