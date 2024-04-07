@@ -9,21 +9,23 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
 
 class CommentController extends AbstractController
 {
-    #[Route('/comment/{id}', name: 'app_comment')]
+
+    #[Route('/comment{id}', name: 'comment')]
     public function create(Animal $animal, EntityManagerInterface $manager, Request $request): Response
     {
         $comment = new Comment();
-        $commentForm = $this->createForm(CommentType::class, $comment);
-        $commentForm->handleRequest($request);
-        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
-            $comment->setAnimal($animal);
+        $comment->setAnimal($animal);
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
             $manager->persist($comment);
             $manager->flush();
         }
-        return $this->redirectToRoute('showAnimalComments', ['animal' => $animal->getId()]);
+        return $this->redirectToRoute("show_animal", ["id" => $animal->getId()]);
 
     }
 }

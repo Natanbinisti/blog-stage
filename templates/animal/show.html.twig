@@ -11,17 +11,16 @@
             <a href="{{ path('delete_animal',{id:animal.id}) }}" class="btn btn-danger">Supprimer</a>
             <a href="{{ path('edit_animal',{id:animal.id}) }}" class="btn btn-warning">Edit</a>
         </div>
-
     <div>
-        {% for comment in animal.comment %}
+        {% for comment in animal.comments %}
             <p>{{ comment.content }}</p>
             <hr>
         {% endfor %}
     </div>
-    {{ form_start(commentForm, {attr: {action:path("comment", {id:animal.id})}}) }}
+    {{ form_start(commentForm, {attr: {action:path('comment', {id:animal.id})}}) }}
 
     {{ form_widget(commentForm.content, {"attr": {"placeholder":"ton commentaire"}}) }}
     <button type="submit" class="btn btn-success">Post</button>
-    {{ form_end(formComment) }}
+    {{ form_end(commentForm) }}
 
 {% endblock %}

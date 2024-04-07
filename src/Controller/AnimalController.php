@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Animal;
+use App\Entity\Comment;
 use App\Form\AnimalType;
+use App\Form\CommentType;
 use App\Repository\AnimalRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -37,11 +39,15 @@ class AnimalController extends AbstractController
             'formAnimal'=>$formAnimal->createView()
         ]);
     }
-    #[Route('animal/show/{id}', name:'show_animal')]
+    #[Route('animal/{id}', name:'show_animal')]
     public function show(Animal $animal):Response
     {
+        $comment = new Comment();
+        $commentForm = $this->createForm(CommentType::class, $comment);
+
         return $this->render('animal/show.html.twig',[
-            'animal'=>$animal
+            'animal'=>$animal,
+            'commentForm'=>$commentForm
         ]);
     }
     #[Route('/animal/delete/{id}', name:'delete_animal')]
