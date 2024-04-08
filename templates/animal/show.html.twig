@@ -14,6 +14,7 @@
     <div>
         {% for comment in animal.comments %}
             <p>{{ comment.content }}</p>
+            <a href="{{ path('delete_comment',{id:comment.id}) }}" class="btn btn-danger">Supprimer</a>
             <hr>
         {% endfor %}
     </div>

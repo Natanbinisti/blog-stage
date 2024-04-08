@@ -28,4 +28,11 @@ class CommentController extends AbstractController
         return $this->redirectToRoute("show_animal", ["id" => $animal->getId()]);
 
     }
+    #[Route('/comment/delete/{id}', name:'delete_comment')]
+    public function delete(Comment $comment, Request $request, EntityManagerInterface $manager): Response
+    {
+        $manager->remove($comment);
+        $manager->flush();
+        return $this->redirectToRoute('show_animal', ["id" => $comment->getAnimal()->getId()]);
+    }
 }
