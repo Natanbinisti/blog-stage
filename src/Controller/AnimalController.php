@@ -31,6 +31,8 @@ class AnimalController extends AbstractController
 
         if ($formAnimal->isSubmitted() && $formAnimal->isValid())
         {
+            $animal->setCreatedAt(new \DateTime());
+            $animal->setAuthor($this->getUser());
             $manager->persist($animal);
             $manager->flush();
             return $this->redirectToRoute('app_animal');

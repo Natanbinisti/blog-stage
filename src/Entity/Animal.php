@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\AnimalRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AnimalRepository::class)]
@@ -23,6 +24,17 @@ class Animal
 
     #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'animal', orphanRemoval: true)]
     private Collection $comments;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $createdAt = null;
+
+    #[ORM\ManyToOne(inversedBy: 'animals')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $author = null;
+
+    #[ORM\ManyToOne(inversedBy: 'animal')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Category $category = null;
 
     public function __construct()
     {
@@ -84,6 +96,42 @@ class Animal
                 $comment->setAnimal(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): static
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): static
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): static
+    {
+        $this->category = $category;
 
         return $this;
     }
