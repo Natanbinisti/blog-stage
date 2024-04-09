@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CategoryController!{% endblock %}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+{% block body %}
+
+
+    {{ form_start(form) }}
+    {{ form_widget(form.name) }}
+    <button type="submit" class="btn btn-success">New</button>
+    {{ form_end(form) }}
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+    </table>
+    <tbody>
+    {% for category in categories %}
+    <tr>
+        <td>{{ category.name }}</td>
+        <td>
+            <button class="btn btn-danger">X</button>
+            <button class="btn btn-warning">e</button>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+
+{% endblock %}
