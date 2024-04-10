@@ -6,7 +6,8 @@
 
         <div class="border border-primary">
             <h3>{{ animal.name }}</h3>
-            <p>weight :{{ animal.weight }}</p>
+            <h4>weight :{{ animal.weight }}</h4>
+            <p>{{ animal.category.name }}</p>
             <p>Auteur : {{ animal.author.email }} le {{ animal.createdAt|date("m/d/Y") }}</p>
             <a href="{{ path('app_animal') }}" class="btn btn-secondary">Back</a>
             {% if app.user == animal.author %}

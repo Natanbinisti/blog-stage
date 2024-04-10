@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ImageController!{% endblock %}
+
+{% block body %}
+
+    {{ form_start(formImage) }}
+    {{ form_row(formImage.imageFile) }}
+    <button type="submit" class="btn btn-success">Send</button>
+    {{ form_end(formImage) }}
+
+{% endblock %}

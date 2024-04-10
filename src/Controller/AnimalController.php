@@ -4,9 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Animal;
 use App\Entity\Comment;
+use App\Entity\Image;
 use App\Form\AnimalType;
 use App\Form\CommentType;
+use App\Form\ImageType;
 use App\Repository\AnimalRepository;
+use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -75,4 +78,15 @@ class AnimalController extends AbstractController
         ]);
     }
 
+    #[Route('/image/index', name:'animal_image')]
+    public function addImage(Animal $animal):Response
+    {
+        $image = new Image();
+        $formImage = $this->createForm(ImageType::class, $image);
+
+        return $this->render('image/index.html.twig', [
+            "animal"=>$animal,
+            "formImage"=>$formImage->createView()
+        ]);
+    }
 }
