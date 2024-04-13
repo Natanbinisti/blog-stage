@@ -1,12 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello ImageController!{% endblock %}
+{% form_theme form_image "bootstrap_5_layout.html.twig" %}
 
 {% block body %}
 
-    {{ form_start(formImage) }}
-    {{ form_row(formImage.imageFile) }}
+    {{ form_start(form_image) }}
+    {{ form_row(form_image.imageFile) }}
     <button type="submit" class="btn btn-success">Send</button>
-    {{ form_end(formImage) }}
+    {{ form_end(form_image) }}
 
 {% endblock %}

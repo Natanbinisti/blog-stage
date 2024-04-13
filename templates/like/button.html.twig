@@ -1,0 +1,17 @@
+{% if app.user %}
+
+    <a href="{{ path(routeName, {id:object.id}) }}" class="likeButton btn btn-primary">
+
+
+
+        <i class="thumb bi bi-hand-thumbs-up{% if object.isLikedBy(app.user) %}-fill{% endif %}">
+            (<span class="nbrLikes">{{ object.likes|length }}</span>)
+
+        </i>
+
+    </a>
+{% else %}
+    <div class="text-muted">Likes : {{ object.likes|length }}</div>
+{% endif %}
+
+<script src="{{ asset('like.js') }}"></script>
