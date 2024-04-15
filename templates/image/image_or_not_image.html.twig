@@ -1,5 +1,0 @@
-{% if object.image %}
-    <img width="150px" src="{{ vich_uploader_asset(object.image)|imagine_filter('mes_imagesS') }}" alt="">
-{% else %}
-    <img width="150px" src="{{ asset('images/no_image.png') }}" alt="">
-{% endif %}

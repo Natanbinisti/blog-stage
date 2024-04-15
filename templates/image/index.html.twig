@@ -1,15 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ImageController!{% endblock %}
-{% form_theme formImage 'bootstrap_5_layout.html.twig' %}
+{% form_theme form_image "bootstrap_5_layout.html.twig" %}
+
 {% block body %}
 
+    {{ form_start(form_image) }}
+    {{ form_row(form_image.imageFile) }}
+    <button type="submit" class="btn btn-success">OK</button>
+    {{ form_end(form_image) }}
 
-    <img width="150px" src="{{ vich_uploader_asset(image) }}" alt="">
-
-
-    {{ form_start(formImage) }}
-    {{ form_row(formImage.imageFile) }}
-    <button type="submit" class="btn btn-success">send</button>
-    {{ form_end(formImage) }}
 {% endblock %}

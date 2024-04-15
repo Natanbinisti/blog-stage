@@ -77,15 +77,15 @@ class AnimalController extends AbstractController
         ]);
     }
 
-    #[Route('/animal/{id}/add', name:'animal_image')]
-    public function addImage(Animal $animal):Response
+    #[Route('/animal/{id}/add', name: 'animal_image')]
+    public function addImage(Animal $animal): Response
     {
         $image = new Image();
         $form_image = $this->createForm(ImageType::class, $image);
 
         return $this->render('image/index.html.twig', [
-            "animal"=>$animal,
-            "formImage"=>$form_image->createView()
+            'animal' => $animal,
+            'form_image' => $form_image->createView(),
         ]);
     }
 }

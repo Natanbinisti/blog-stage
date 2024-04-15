@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+
 use App\Repository\ImageRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
@@ -29,22 +30,6 @@ class Image
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\OneToOne(mappedBy: 'image', cascade: ['persist', 'remove'])]
-    private ?Animal $animal = null;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-    /**
-     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
-     * of 'UploadedFile' is injected into this setter to trigger the update. If this
-     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
-     * must be able to accept an instance of 'File' as the bundle will inject one here
-     * during Doctrine hydration.
-     *
-     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
-     */
     public function setImageFile(?File $imageFile = null): void
     {
         $this->imageFile = $imageFile;
@@ -81,25 +66,8 @@ class Image
         return $this->imageSize;
     }
 
-    public function getAnimal(): ?Animal
+    public function getId(): ?int
     {
-        return $this->nem;
-    }
-
-    public function setAnimal(?Animal $animal): static
-    {
-        // unset the owning side of the relation if necessary
-        if ($animal === null && $this->nem !== null) {
-            $this->nem->setImage(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($animal !== null && $animal->getImage() !== $this) {
-            $animal->setImage($this);
-        }
-
-        $this->nem = $animal;
-
-        return $this;
+        return $this->id;
     }
 }
