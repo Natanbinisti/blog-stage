@@ -12,7 +12,6 @@
             {% include 'like/button.html.twig' with { routeName:"app_like", object:animal } %}
             <a href="{{ path('app_animal') }}" class="btn btn-secondary">Back</a>
             {% if app.user == animal.author %}
-                <a href="{{ path('animal_image', {id:animal.id}) }}" class="btn btn-success">Image</a>
             <a href="{{ path('delete_animal',{id:animal.id}) }}" class="btn btn-danger">Supprimer</a>
             <a href="{{ path('edit_animal',{id:animal.id}) }}" class="btn btn-warning">Edit</a>
             {% endif %}

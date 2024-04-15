@@ -12,11 +12,9 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 class Image
 {
     #[ORM\Id]
-    #[ORM\Column]
     #[ORM\GeneratedValue]
+    #[ORM\Column]
     private ?int $id = null;
-
-    // ... other fields
 
     // NOTE: This is not a mapped field of entity metadata, just a simple property.
     #[Vich\UploadableField(mapping: 'mes_images', fileNameProperty: 'imageName', size: 'imageSize')]
@@ -31,6 +29,13 @@ class Image
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    #[ORM\OneToOne(mappedBy: 'image', cascade: ['persist', 'remove'])]
+    private ?Animal $animal = null;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
     /**
      * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
      * of 'UploadedFile' is injected into this setter to trigger the update. If this
@@ -74,5 +79,27 @@ class Image
     public function getImageSize(): ?int
     {
         return $this->imageSize;
+    }
+
+    public function getAnimal(): ?Animal
+    {
+        return $this->nem;
+    }
+
+    public function setAnimal(?Animal $animal): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($animal === null && $this->nem !== null) {
+            $this->nem->setImage(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($animal !== null && $animal->getImage() !== $this) {
+            $animal->setImage($this);
+        }
+
+        $this->nem = $animal;
+
+        return $this;
     }
 }
