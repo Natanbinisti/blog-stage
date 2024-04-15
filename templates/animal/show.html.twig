@@ -14,8 +14,8 @@
             {% if app.user == animal.author %}
             <a href="{{ path('delete_animal',{id:animal.id}) }}" class="btn btn-danger">Supprimer</a>
             <a href="{{ path('edit_animal',{id:animal.id}) }}" class="btn btn-warning">Edit</a>
+                <a class="btn btn-primary" href="{{ path("animal_image",{id:animal.id}) }}">add image</a>
             {% endif %}
-            <a class="btn btn-primary" href="{{ path("animal_image",{id:animal.id}) }}">add image</a>
         </div>
     <div>
         {% for comment in animal.comments %}
