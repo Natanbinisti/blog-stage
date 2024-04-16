@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Image;
 use App\Entity\Animal;
+use App\Entity\Image;
 use App\Form\ImageType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -55,6 +55,4 @@ class ImageController extends AbstractController
 
         return $this->redirectToRoute($redirectRoute, $routeParam);
     }
-
-
 }

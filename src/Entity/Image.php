@@ -30,9 +30,6 @@ class Image
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\OneToOne(mappedBy: 'image', cascade: ['persist', 'remove'])]
-    private ?Animal $animal = null;
-
     public function setImageFile(?File $imageFile = null): void
     {
         $this->imageFile = $imageFile;

@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    {{ form_start(form_image) }}
+    {{ form_start(form_image,{attr:{action:path('add_animal_image',{id:animal.id}) }}) }}
     {{ form_row(form_image.imageFile) }}
     <button type="submit" class="btn btn-success">OK</button>
     {{ form_end(form_image) }}

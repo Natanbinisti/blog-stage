@@ -36,10 +36,10 @@ class Animal
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
 
-    #[ORM\OneToMany(targetEntity: Like::class, mappedBy: 'animal')]
+    #[ORM\OneToMany(targetEntity: Like::class, mappedBy: 'animal', orphanRemoval: true)]
     private Collection $likes;
 
-    #[ORM\OneToOne(inversedBy: 'animal', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Image $image = null;
 
     public function __construct()
@@ -142,6 +142,7 @@ class Animal
 
         return $this;
     }
+
     /**
      * @return Collection<int, Like>
      */
@@ -193,5 +194,4 @@ class Animal
 
         return $this;
     }
-
 }

@@ -23,8 +23,7 @@
     <tr>
         <td>{{ category.name }}</td>
         <td>
-            <button class="btn btn-danger">X</button>
-            <button class="btn btn-warning">e</button>
+            <a href="{{ path('delete_category',{id:category.id}) }}" class="btn btn-danger">Supprimer</a>
         </td>
     </tr>
     {% endfor %}

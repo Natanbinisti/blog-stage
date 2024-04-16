@@ -6,12 +6,18 @@
 
     {% for animal in animal %}
     <div class="border bporder-primary">
+        {% if animal.image %}
+            <img width="200px" src="{{ vich_uploader_asset(animal.image) }}" alt="">
+        {% else %}
+            <img width="200px" src ="{{ asset("images/no_image.png") }}">
+        {% endif %}
         <h3>{{ animal.name }}</h3>
-        {% include 'image/image_or_not_image.html.twig' with {object:animal} %}
         <h4>weight :{{ animal.weight }}</h4>
         <p>{{ animal.category.name }}</p>
         <a href="{{ path('show_animal', {id:animal.id}) }}" class="btn btn-primary">Voir</a>
     </div>
     {% endfor %}
+
+    <script src="{{ asset('like.js') }}"></script>
 
 {% endblock %}

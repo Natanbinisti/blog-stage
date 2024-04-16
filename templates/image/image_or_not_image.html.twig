@@ -1,5 +1,6 @@
 {% if object.image %}
-    <img width="150px" src="{{ vich_uploader_asset(object.image)>
+    <img width="150px" src="{{ vich_uploader_asset(object.image) }}" alt="">
 {% else %}
     <img width="150px" src="{{ asset('images/no_image.png') }}" alt="">
 {% endif %}
+

@@ -9,12 +9,13 @@
             <h4>weight :{{ animal.weight }}</h4>
             <p>{{ animal.category.name }}</p>
             <p>Auteur : {{ animal.author.email }} le {{ animal.createdAt|date("m/d/Y") }}</p>
-            {% include 'like/button.html.twig' with { routeName:"app_like", object:animal } %}
             <a href="{{ path('app_animal') }}" class="btn btn-secondary">Back</a>
             {% if app.user == animal.author %}
             <a href="{{ path('delete_animal',{id:animal.id}) }}" class="btn btn-danger">Supprimer</a>
             <a href="{{ path('edit_animal',{id:animal.id}) }}" class="btn btn-warning">Edit</a>
                 <a class="btn btn-primary" href="{{ path("animal_image",{id:animal.id}) }}">add image</a>
+
+                {% include 'like/button.html.twig' with { routeName:"app_like", object:animal } %}
             {% endif %}
         </div>
     <div>
@@ -33,4 +34,5 @@
     <button type="submit" class="btn btn-success">Post</button>
     {{ form_end(commentForm) }}
     {% endif %}
+    <script src="{{ asset('like.js') }}"></script>
 {% endblock %}

@@ -4,6 +4,7 @@ const buttons = document.querySelectorAll(".likeButton")
 function like(event)
 {
     event.preventDefault()
+    console.log("coucou")
     fetch(this.href)
         .then(response => response.json())
         .then((data) =>{
